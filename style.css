@@ -162,8 +162,7 @@ p {
     align-items: center;
     overflow: hidden;
     color: #FFFFFF;
-    background:
-        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1920&q=90')
+        background: url('imagenes/pupusas-queso.webp')
         center / cover no-repeat;
 }
 
@@ -601,10 +600,32 @@ p {
     box-shadow: 0 0 0 3px rgba(201, 154, 82, .18);
 }
 
+    .formulario-pedido {
+        border-radius: 18px;
+        color: #3F3028;
+    }
+
+    .campo-oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+    }
+
+    .mapa-card {
+        border-radius: 20px;
+    }
+
 #estadoPeticion {
     color: #4E1D14;
     font-size: .92rem;
 }
+
+    #estadoPeticion.error {
+        color: #A32922;
+    }
 
 #enviarPeticion:disabled {
     opacity: .65;
