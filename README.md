@@ -7,6 +7,7 @@ Sitio web adaptable para mostrar el menú, filtrar platillos y enviar pedidos a 
 - `index.html`: contenido y secciones de la página.
 - `style.css`: estilos y ajustes para escritorio y celular.
 - `js/main.js`: navegación, filtros, tema, botón superior, traducción y formulario.
+- `api/contact.js`: función de Vercel para enviar los pedidos a Discord.
 - `imagenes/`: fotografías locales usadas por la página.
 - `server.mjs`: servidor web y ruta privada `POST /api/contact`.
 - `.env`: configuración local del webhook; no se comparte ni se sube a Git.
@@ -26,6 +27,16 @@ Instala Node.js 18 o posterior. El proyecto no requiere instalar paquetes.
 
 El webhook nunca está en el HTML ni en el navegador. El servidor valida los campos, limita el tamaño del mensaje y los envíos por IP, ignora menciones y responde con un estado visible en el formulario.
 
+### Configurar Vercel
+
+1. Revoca el webhook que se compartió y crea uno nuevo en Discord.
+2. En el proyecto de Vercel, abre **Settings → Environment Variables**.
+3. Añade `DISCORD_WEBHOOK_URL` con la URL del webhook nuevo y habilítala para los entornos que uses.
+4. Guarda y vuelve a desplegar el proyecto para que la función reciba la variable.
+5. Envía un pedido de prueba desde la sección «Pedidos» y confirma que llegó al canal.
+
+Vercel detecta `api/contact.js` como la ruta `POST /api/contact`; no es necesario exponer el webhook ni configurar una URL distinta en el formulario.
+
 ## Cambiar contenido
 
 - Para modificar platillos, precios y descripciones, edita las tarjetas de `index.html`.
@@ -36,6 +47,7 @@ El webhook nunca está en el HTML ni en el navegador. El servidor valida los cam
 
 ## Publicar
 
-Publica la aplicación en un servicio que ejecute Node.js y configura `DISCORD_WEBHOOK_URL` como variable de entorno privada en el panel del proveedor. No uses solo alojamiento estático si necesitas que el formulario envíe a Discord: la ruta `/api/contact` requiere ejecutar `server.mjs`.
+En Vercel, la función `api/contact.js` atiende el formulario. En otros proveedores, usa el servidor `server.mjs`. En ambos casos configura `DISCORD_WEBHOOK_URL` como variable de entorno privada en el panel del proveedor; el webhook no debe incluirse en archivos públicos.
 
 Las dependencias de Bootstrap, Bootstrap Icons, Google Fonts, Google Translate y el mapa se cargan desde servicios externos; el resto de imágenes es local.
+# ayuda-
